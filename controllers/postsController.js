@@ -61,7 +61,21 @@ function store(req, res) {
 }
 
 function update(req, res) {
-  res.send("Aggiornamento del post " + req.params.id);
+  const id = parseInt(req.params.id);
+  const postToUpdate = postsExported.find((item) => item.id === id);
+
+  if (!postToUpdate) {
+    res.status(404);
+    return res.json({ error: "Not Found", message: "Post non trovato" });
+  }
+
+  postToUpdate.titolo = req.body.titolo;
+  postToUpdate.contenuto = req.body.contenuto;
+  postToUpdate.immagine = req.body.immagine;
+  postToUpdate.tags = req.body.tags;
+
+  res.json(postToUpdate);
+  console.log("aggiornatp:", postToUpdate);
 }
 
 function modify(req, res) {
