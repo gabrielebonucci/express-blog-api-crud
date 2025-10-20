@@ -33,7 +33,31 @@ function show(req, res) {
 }
 
 function store(req, res) {
-  res.send("Creazione di un nuovo post");
+  // estraggo dati dal body
+  const { titolo, contenuto, immagine, tags } = req.body;
+
+  //crea un nuovo ID
+  const newId = postsExported[postsExported.length - 1].id + 1;
+
+  /*Stampa nel terminale i dati in arrivo
+  console.log("Dati ricevuti nel body:", req.body);
+  res.send("Dati ricevuti, controlla il terminale!");
+  */
+
+  // oggetto del nuovo post
+  const newPost = {
+    id: newId,
+    titolo,
+    contenuto,
+    immagine,
+    tags,
+  };
+
+  postsExported.push(newPost);
+
+  res
+    .status(201)
+    .json({ result: true, message: "inserimento nuovo post", newPost });
 }
 
 function update(req, res) {

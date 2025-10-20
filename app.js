@@ -7,10 +7,12 @@ const port = 3000;
 // importo modulo router posts
 const postsRouter = require("./routers/posts");
 
-app.use("/posts", postsRouter);
-
 //usiamo il middleware static per rendere disponibile i file statici
 app.use(express.static("public"));
+//lettura json nel body parser
+app.use(express.json());
+// routers
+app.use("/posts", postsRouter);
 
 // definiamo rotta per index
 app.get("/", (req, res) => {
