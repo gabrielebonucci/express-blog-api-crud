@@ -69,10 +69,10 @@ function update(req, res) {
     return res.json({ error: "Not Found", message: "Post non trovato" });
   }
 
-  postToUpdate.titolo = req.body.titolo;
-  postToUpdate.contenuto = req.body.contenuto;
-  postToUpdate.immagine = req.body.immagine;
-  postToUpdate.tags = req.body.tags;
+  postToUpdate.title = req.body.title || postToUpdate.title;
+  postToUpdate.content = req.body.content || postToUpdate.content;
+  postToUpdate.image = req.body.image || postToUpdate.image;
+  postToUpdate.tags = req.body.tags || postToUpdate.tags;
 
   res.json(postToUpdate);
   console.log("aggiornatp:", postToUpdate);
