@@ -7,8 +7,8 @@ const port = 3000;
 
 // importo modulo router posts e middleware
 const postsRouter = require("./routers/posts");
-const NotFound = require("./middlewares/notFound");
-const ServerError = require("./middlewares/serverError");
+const NotFound = require("./middlewares/error404");
+const ServerError = require("./middlewares/error500");
 
 //usiamo il middleware static per rendere disponibile i file statici
 app.use(express.static("public"));
