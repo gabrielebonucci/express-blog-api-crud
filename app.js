@@ -64,6 +64,26 @@ app.get("/bacheca", (req, res) => {
   res.json(Post);
 });
 
+// middleware per gestione errori e rotte mancanti//
+
+const handleNotFound = (req, res, next) => {
+  res.status(404).json({
+    error: "Not Found",
+    message: "La risorsa non esiste",
+  });
+};
+
+const handleServerError = (err, req, res, next) => {
+  console.error("[SERVER ERROR]", err.stack || err);
+  res.status(500).json({
+    error: "Internal Server Error",
+    message: "qualcosa è andato storto nel server",
+  });
+};
+
+app.use(handleNotFound);
+app.use(handleServerError);
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
